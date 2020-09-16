@@ -1,0 +1,14 @@
+<mvc:View controllerName="com.dynamiccolumn.DynamicColumn.controller.View1" xmlns:mvc="sap.ui.core.mvc" xmlns:tab ="sap.ui.table" displayBlock="true" xmlns="sap.m">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					<content>
+					<tab:Table id ="idTable" visibleRowCount = "10" ></tab:Table>
+					</content>
+			      
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>
