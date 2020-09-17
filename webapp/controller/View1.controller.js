@@ -1,6 +1,10 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller"
-], function (Controller) {
+	"sap/ui/core/mvc/Controller",
+	"sap/ui/table/RowAction",
+	"sap/ui/table/RowActionItem",
+	"sap/ui/table/RowSettings",
+	"sap/m/MessageToast"
+], function (Controller, RowAction, RowActionItem, RowSettings,MessageToast) {
 	"use strict";
 
 	return Controller.extend("com.dynamiccolumn.DynamicColumn.controller.View1", {
@@ -19,17 +23,17 @@ sap.ui.define([
 				firstName: "Sachin",
 				lastName: "Tendulkar",
 				department: "Cricket",
-				active: "R"
+				active: "Retired"
 			}, {
 				firstName: "Lionel",
 				lastName: "Messi",
 				department: "Football",
-				active: "A"
+				active: "Active"
 			}, {
 				firstName: "Mohan",
 				lastName: "Lal",
 				department: "Film",
-				active: "A"
+				active: "Active"
 			}];
 			var oTable = this.getView().byId("idTable");
 			var oModel = new sap.ui.model.json.JSONModel();
@@ -40,14 +44,41 @@ sap.ui.define([
 		oTable.setModel(oModel);
       
 		oTable.bindColumns("/columns", function(sId, oContext) {
-		    var columnName = oContext.getObject().columnName;
+			  var columnName = oContext.getObject().columnName;
+				var oTemplate =  new sap.m.ObjectStatus({
+					text : "{"+ columnName +"}",
+		        	state: {path : columnName , formatter : function(data){
+		        		if(data){
+		        			if(data == "Retired"){
+		        				return "Error";
+		        			} else if (data == "Active") {
+		        				return "Success";
+		        			} else {
+		        				return "None";
+		        			}
+		        			
+		        		}
+		        	
+		        	}}
+				});
+		
+
 		    return new sap.ui.table.Column({
 		        label: columnName,
-		        template: columnName,
+		        filterProperty: columnName, 
+		        sortProperty : columnName,
+		        template: oTemplate
 		    });
 		});
       
-		oTable.bindRows("/rows");
-		}
+	
+	
+	    	oTable.bindRows("/rows");
+		},
+		handleActionPress : function(oEvent) {
+			var oRow = oEvent.getParameter("row");
+			var oItem = oEvent.getParameter("item");
+			var sSelectedObject = oItem.getBindingContext().getObject();
+		} 
 	});
 });
