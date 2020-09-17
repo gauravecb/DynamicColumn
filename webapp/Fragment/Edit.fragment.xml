@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" 	xmlns:u="sap.ui.unified">
-	<Dialog id="uploadCSV" title="Upload CSV">
+	<Dialog id="edit" title="Upload CSV">
 		<content>
 			<u:FileUploader id="fileUploader" name="myFileUpload" uploadUrl="upload/" tooltip="Upload your file to the local server"
 				uploadComplete="handleUploadComplete"/>
