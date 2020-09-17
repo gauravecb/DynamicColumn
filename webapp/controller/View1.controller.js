@@ -3,8 +3,9 @@ sap.ui.define([
 	"sap/ui/table/RowAction",
 	"sap/ui/table/RowActionItem",
 	"sap/ui/table/RowSettings",
-	"sap/m/MessageToast"
-], function (Controller, RowAction, RowActionItem, RowSettings, MessageToast) {
+	"sap/m/MessageToast",
+	"sap/ui/core/Fragment"
+], function (Controller, RowAction, RowActionItem, RowSettings, MessageToast,Fragment) {
 	"use strict";
 
 	return Controller.extend("com.dynamiccolumn.DynamicColumn.controller.View1", {
@@ -97,7 +98,9 @@ sap.ui.define([
 				this.byId("edit").open();
 			}
 		},
-
+      handleCancel : function(){
+        	this.byId("edit").close();
+        },
 	
 	});
 });
