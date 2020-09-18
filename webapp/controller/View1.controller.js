@@ -4,11 +4,13 @@ sap.ui.define([
 	"sap/ui/table/RowActionItem",
 	"sap/ui/table/RowSettings",
 	"sap/m/MessageToast",
-	"sap/ui/core/Fragment"
-], function (Controller, RowAction, RowActionItem, RowSettings, MessageToast,Fragment) {
+	"sap/ui/core/Fragment",
+	"../model/formatter"
+], function (Controller, RowAction, RowActionItem, RowSettings, MessageToast, Fragment,formatter) {
 	"use strict";
 
 	return Controller.extend("com.dynamiccolumn.DynamicColumn.controller.View1", {
+		formatter: formatter,
 		onInit: function () {
 			var columnData = [{
 				columnName: "firstName"
@@ -77,12 +79,9 @@ sap.ui.define([
 			oTable.bindRows("/rows");
 		},
 		handleActionPress: function (oEvent) {
-			var oRow = oEvent.getParameter("row");
-			var oItem = oEvent.getParameter("item");
-			var sSelectedObject = oItem.getBindingContext().getObject();
-
+			// Open the Fragnemt
 			var oView = this.getView();
-			
+
 			if (!this.byId("edit")) {
 				// load asynchronous XML fragment
 				Fragment.load({
@@ -97,10 +96,46 @@ sap.ui.define([
 			} else {
 				this.byId("edit").open();
 			}
+
+			// Create Content for simple form
+			//	var oRow = oEvent.getParameter("row");
+			var oForm = this.getView().byId("SimpleForm");
+			oForm.removeAllContent();
+			var oItem = oEvent.getParameter("item");
+			var obj = oItem.getBindingContext().getObject();
+			for (var key in obj) {
+				if (obj.hasOwnProperty(key)) {
+					var val = obj[key];
+					var oLabel = new sap.m.Label({
+						text: key
+					});
+					oForm.addContent(oLabel);
+					var oInput = new sap.m.Input({
+						value: val,
+						placeholder: "Enter a first name"
+					});
+					oForm.addContent(oInput);
+
+				}
+			}
+
 		},
-      handleCancel : function(){
-        	this.byId("edit").close();
-        },
-	
+		handleCancel: function () {
+			this.byId("edit").close();
+		},
+		handleSave: function (oEvent) {
+			var aContent = this.getView().byId("SimpleForm").getContent();
+			var Obj = {};
+			for (var i = 0; i < aContent.length; i++) {
+
+				if (i % 2 === 0) {
+					var sKey = aContent[i].getText();
+				}else {
+					var sValue = aContent[i].getValue();
+				}
+				Obj[sKey] = sValue;
+			}
+		}
+
 	});
 });

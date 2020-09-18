@@ -5,14 +5,17 @@
 			<pages>
 				<Page id="page" title="{i18n>title}">
 					<content>
-						<tab:Table id="idTable" visibleRowCount="10" rowActionCount = "1">
-						<tab:rowActionTemplate>
+						<tab:Table id="idTable" visibleRowCount="10" rowActionCount="1">
+							<tab:rowActionTemplate>
 								<tab:RowAction>
 									<tab:items>
-										<tab:RowActionItem icon= "sap-icon://edit" text= "Edit" press = "handleActionPress"></tab:RowActionItem>
+										<tab:RowActionItem icon="sap-icon://edit" text="Edit" press="handleActionPress"></tab:RowActionItem>
 									</tab:items>
 								</tab:RowAction>
 							</tab:rowActionTemplate>
+						<!--	<tab:rowSettingsTemplate>
+								<tab:RowSettings highlight="{	path: 'invoice>Status',formatter: '.formatter.statusText'}"/>
+							</tab:rowSettingsTemplate>-->
 						</tab:Table>
 					</content>
 				</Page>

@@ -1,12 +1,12 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" 	xmlns:l="sap.ui.layout"
 	xmlns:f="sap.ui.layout.form">
-	<Dialog id="edit" title="Upload CSV">
+	<Dialog id="edit" title="Edit">
 		<content>
 		<VBox class="sapUiSmallMargin">
-		<f:SimpleForm id="SimpleFormChange354"
+		<f:SimpleForm id="SimpleForm"
 			editable="true"
 			layout="ResponsiveGridLayout"
-			title="Address"
+			
 			labelSpanXL="3"
 			labelSpanL="3"
 			labelSpanM="3"
@@ -20,7 +20,7 @@
 			columnsL="1"
 			columnsM="1"
 			singleContainerFullSize="false" >
-			<f:content>
+			<!--<f:content>
 				<Label text="Name" />
 				<Input id="name" value="{SupplierName}" />
 				<Label text="Street/No." />
@@ -46,12 +46,12 @@
 						<core:Item text="USA" key="USA"/>
 					</items>
 				</Select>
-			</f:content>
+			</f:content>-->
 		</f:SimpleForm>
 	</VBox>
 		</content>
 		<beginButton>
-			<Button text="Upload" press = "handleUpload"></Button>
+			<Button text="Save" press = "handleSave"></Button>
 		</beginButton>
 		<endButton>
 			<Button text="Cancel" press = "handleCancel"></Button>
